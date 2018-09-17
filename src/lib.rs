@@ -20,8 +20,8 @@ impl<'a> InternedString<'a> {
   pub fn as_cstr(self) -> &'a ffi::CStr {
     self.ptr.as_cstr()
   }
-  pub fn as_cstr_ptr(self) -> *const std::raw::c_char {
-    self.ptr.ptr() as *const libc::c_char
+  pub fn as_cstr_ptr(self) -> *const std::os::raw::c_char {
+    self.ptr.ptr() as *const std::os::raw::c_char
   }
 }
 
@@ -33,7 +33,6 @@ pub struct Context {
 }
 
 unsafe impl Send for Context {}
-unsafe impl !Sync for Context {}
 
 impl Context {
   pub fn new() -> Self {
